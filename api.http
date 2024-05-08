@@ -8,3 +8,12 @@ GET {{host}}/france
 ###
 
 GET {{host}}/list
+
+###
+
+POST {{host}}/payment
+Content-Type: application/json
+
+{
+  "amount": 100
+}
