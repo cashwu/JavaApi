@@ -11,9 +11,20 @@ GET {{host}}/list
 
 ###
 
-POST {{host}}/payment
+POST {{host}}/paymentDetail
 Content-Type: application/json
 
 {
+  "amount": 100
+}
+
+###
+
+POST {{host}}/paymentProxy
+Content-Type: application/json
+RequestId: 123
+
+{
+  "id" : "1",
   "amount": 100
 }
