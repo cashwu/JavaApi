@@ -3,6 +3,7 @@ package com.cashwu.javaapi.controller;
 import com.cashwu.javaapi.model.Payment;
 import com.cashwu.javaapi.model.PaymentDetails;
 import com.cashwu.javaapi.proxy.PaymentProxy;
+import com.cashwu.javaapi.proxy.PaymentProxyRestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,12 @@ public class PaymentController {
 
     private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
     private final PaymentProxy paymentProxy;
+    private final PaymentProxyRestTemplate paymentProxyRestTemplate;
 
-    public PaymentController(PaymentProxy paymentProxy) {
+    public PaymentController(PaymentProxy paymentProxy,
+                             PaymentProxyRestTemplate paymentProxyRestTemplate) {
         this.paymentProxy = paymentProxy;
+        this.paymentProxyRestTemplate = paymentProxyRestTemplate;
     }
 
     @PostMapping("/paymentProxy")
@@ -33,9 +37,10 @@ public class PaymentController {
 
         log.info("create payment proxy payment {}", payment);
 
-        String requestId = UUID.randomUUID().toString();
+//        String requestId = UUID.randomUUID().toString();
+//        return paymentProxy.createPayment(requestId, payment);
 
-        return paymentProxy.createPayment(requestId, payment);
+        return paymentProxyRestTemplate.createPayment(payment);
     }
 
     @PostMapping("/payment")
